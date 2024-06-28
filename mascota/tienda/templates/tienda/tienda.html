@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASCOTA AMIGAS</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #100f0f;
+            color: #ece9e9;
+        }
+        .navbar-brand img {
+            max-height: 50px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+        .navbar .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+        .rgb-border {
+            border: 5px solid;
+            animation: rgb-border-animation 2s infinite;
+        }
+        @keyframes rgb-border-animation {
+            0% {
+                border-color: red;
+            }
+            33% {
+                border-color: green;
+            }
+            66% {
+                border-color: blue;
+            }
+            100% {
+                border-color: red;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/logom.png' %}" alt="">
+            MASCOTA AMIGAS
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#productos">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contacto">Contacto</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/shopping-cart.png" width="24" height="24" alt="Carrito">
+                        <span id="cart-count" class="badge badge-danger">0</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right p-3" aria-labelledby="navbarDropdown">
+                        <h5>Carrito de Compras</h5>
+                        <div id="carritoItems">
+                            <p class="text-center">Tu carrito está vacío.</p>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'crear_pago' %}" class="btn btn-primary">Finalizar compra</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="home" class="container mt-5">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'images/correa.jpg' %}" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/identificacion.jpg' %}" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/cama.jpg' %}" class="d-block w-80" alt="...">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Productos  -->
+    <div id="productos" class="container mt-5">
+        <h2>Productos</h2>
+        <div class="row">
+            <!-- Producto 1 -->
+            <div class="col-md-4">
+                <div class="card rgb-border">
+                    <img src="{% static 'images/correa.jpg' %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">CORREA PARA PERROS</h5>
+                        <p class="card-text">CORREA PARA TODO TIPO DE PERROS AJUSTABLE.</p>
+                        <button class="btn btn-primary" onclick="agregarAlCarrito(1)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 2 -->
+            <div class="col-md-4">
+                <div class="card rgb-border">
+                    <img src="{% static 'images/bandana.jpg' %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">BANDANA PARA PERROS</h5>
+                        <p class="card-text">.</p>
+                        <button class="btn btn-primary" onclick="agregarAlCarrito(2)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 3 -->
+            <div class="col-md-4">
+                <div class="card rgb-border">
+                    <img src="{% static 'images/identificacion2.jpg' %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">IDENTIFICACIÓN PARA MASCOTAS</h5>
+                        <p class="card-text">Identificación grabada para tu mascota.</p>
+                        <button class="btn btn-primary" onclick="agregarAlCarrito(3)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <!-- Producto 4 -->
+            <div class="col-md-4">
+                <div class="card rgb-border">
+                    <img src="{% static 'images/juguete.jpg' %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">JUGUETE PARA PERROS</h5>
+                        <p class="card-text">Juguete resistente y divertido.</p>
+                        <button class="btn btn-primary" onclick="agregarAlCarrito(4)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 5 -->
+            <div class="col-md-4">
+                <div class="card rgb-border">
+                    <img src="{% static 'images/comida2.jpg' %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">COMIDA PARA PERROS</h5>
+                        <p class="card-text">Alimento balanceado para perros.</p>
+                        <button class="btn btn-primary" onclick="agregarAlCarrito(5)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 6 -->
+            <div class="col-md-4">
+                <div class="card rgb-border">
+                    <img src="{% static 'images/cama.jpg' %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">CAMA PARA MASCOTAS</h5>
+                        <p class="card-text">Cama cómoda y acogedora para mascotas.</p>
+                        <button class="btn btn-primary" onclick="agregarAlCarrito(6)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <!-- Producto 7 -->
+            <div class="col-md-4">
+                <div class="card rgb-border">
+                    <img src="{% static 'images/shampoo.jpg' %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">SHAMPOO PARA MASCOTAS</h5>
+                        <p class="card-text">Shampoo suave para pieles sensibles.</p>
+                        <button class="btn btn-primary" onclick="agregarAlCarrito(7)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 8 -->
+            <div class="col-md-4">
+                <div class="card rgb-border">
+                    <img src="{% static 'images/transportadora.jpg' %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">TRANSPORTADORA PARA MASCOTAS</h5>
+                        <p class="card-text">Transportadora segura y cómoda.</p>
+                        <button class="btn btn-primary" onclick="agregarAlCarrito(8)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 9 -->
+            <div class="col-md-4">
+                <div class="card rgb-border">
+                    <img src="{% static 'images/golosinas.jpg' %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">GOLOSINAS PARA MASCOTAS</h5>
+                        <p class="card-text">Dulces golosinas para tu mascota.</p>
+                        <button class="btn btn-primary" onclick="agregarAlCarrito(9)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contacto -->
+    <div id="contacto" class="container mt-5">
+        <h2>Contacto</h2>
+        <form>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        let carrito = [];
+
+        function agregarAlCarrito(productoId) {
+            let producto = {
+                id: productoId,
+                nombre: "Producto " + productoId,
+                descripcion: "Descripción breve del producto.",
+                imagen: "img/product" + productoId + ".jpg"
+            };
+            carrito.push(producto);
+            mostrarCarrito();
+            alert('Producto agregado al carrito: ' + productoId);
+        }
+
+        function eliminarDelCarrito(productoId) {
+            carrito = carrito.filter(producto => producto.id !== productoId);
+            mostrarCarrito();
+            alert('Producto eliminado del carrito: ' + productoId);
+        }
+
+        function mostrarCarrito() {
+            let carritoItems = document.getElementById('carritoItems');
+            carritoItems.innerHTML = '';
+            if (carrito.length === 0) {
+                carritoItems.innerHTML = '<p class="text-center">Tu carrito está vacío.</p>';
+            } else {
+                carrito.forEach(producto => {
+                    carritoItems.innerHTML += `
+                        <div class="col-md-12 mb-3">
+                            <div class="card">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="${producto.imagen}" class="card-img" alt="${producto.nombre}">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${producto.nombre}</h5>
+                                            <p class="card-text">${producto.descripcion}</p>
+                                            <button class="btn btn-danger" onclick="eliminarDelCarrito(${producto.id})">Eliminar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('cart-count').innerText = carrito.length;
+        }
+
+        $(document).ready(function() {
+            $('#contactForm').on('submit', function(e) {
+                e.preventDefault();
+                var name = $('#name').val();
+                var email = $('#email').val();
+                var message = $('#message').val();
+
+                if (name && email && message) {
+                    alert('Mensaje enviado correctamente.');
+                    $(this).trigger('reset');
+                } else {
+                    alert('Por favor, complete todos los campos.');
+                }
+            });
+        });
+
+        function validarCarritoCompra() {
+            if (carrito.length === 0) {
+                alert('No hay productos en el carrito.');
+                return false; // Evita que se envíe la compra si el carrito está vacío
+            }
+
+            // Validación adicional: Verificar si la cantidad total de productos en el carrito supera un límite
+            var cantidadTotal = carrito.reduce((total, producto) => total + producto.cantidad, 0);
+            if (cantidadTotal > 10) {
+                alert('No puedes agregar más de 10 productos al carrito.');
+                return false; // Evita que se envíe la compra si se supera el límite de cantidad
+            }
+
+            // Validación adicional: Verificar si hay productos con una cantidad negativa en el carrito
+            if (carrito.some(producto => producto.cantidad < 0)) {
+                alert('No se pueden agregar productos con cantidad negativa.');
+                return false; // Evita que se envíe la compra si hay productos con cantidad negativa
+            }
+
+            return true; // Permite enviar la compra si todas las validaciones pasan
+        }
+
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</body>
+</html>

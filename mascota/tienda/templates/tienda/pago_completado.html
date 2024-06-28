@@ -1,0 +1,10 @@
+<!-- templates/pago_completado.html -->
+def pago_completado(request):
+    payment_id = request.GET.get('paymentId')
+    payer_id = request.GET.get('PayerID')
+
+    pago = Payment.find(payment_id)
+    if pago.execute({"payer_id": payer_id}):
+        return render(request, 'pago_exito.html')
+    else:
+        return render(request, 'pago_error.html', {'error': pago.error})
